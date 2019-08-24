@@ -1,0 +1,13 @@
+/**
+ * Ecosystem.java
+ * Version 1.0
+ * Author: @Jordan A.
+ * @ 04/17 - 05/06
+ * This program generates the map, and contains the code for interactions.
+ */
+
+class Ecosystem{
+  Ecosystem(int mapSize, int sheepCount, int sheepHP, int wolfCount, int wolfHP, int grassCount, int grassRate){
+    //put base stuff here
+  }
+}

@@ -1,0 +1,38 @@
+/**
+ * Entity.java
+ * Version 1.0
+ * @Author: Jordan A.
+ * @4/17/2019
+ * A class that determines what traits all entities should have
+ */
+
+abstract class Entity{
+  private int health;
+  private int turns;
+  private int x; 
+  private int y;
+  
+  void setHP(int hp){
+    this.health = hp; //sets the starting hp of the entity
+    System.out.println(health);
+  }
+  
+  void adjustHP(int hp){ 
+    this.health += hp; //mods hp values for adding hp values or taking damage
+  }
+  
+  void setXY(int x, int y){
+    this.x = x; //sets the x value of the entity
+    this.y = y; //sets the y value of the entity
+  }
+  
+  int returnHP() {
+    return this.health; //returns the hp value for comparing
+  }
+  
+  int returnTurns(){
+    return this.turns;
+  }
+  
+  
+}

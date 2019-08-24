@@ -1,0 +1,5 @@
+79 246 70 70
+427 311 70 70
+end of saved tables
+523 332 213 240
+end of misc rectangles
