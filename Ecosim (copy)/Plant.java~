@@ -1,0 +1,19 @@
+class Plant extends Being {
+  private String placeholder = "p"; // delete later
+  
+  private int spawnRate;
+  
+  Plant(int hp, int spawnRate) {
+    super(hp);
+    this.spawnRate = spawnRate;
+  }
+  
+  public int getSpawnRate() {
+    return this.spawnRate;
+  }
+  
+  //delete later
+  public String getPlaceholder() {
+    return this.placeholder;
+  }
+}

@@ -1,0 +1,22 @@
+abstract class Being {
+  private int hp;
+  
+  private String placeholder; // delete later
+  
+  Being(int hp) {
+    this.hp = hp;
+  }
+  
+  //delete placeholder later:
+  public String getPlaceholder() {
+    return this.placeholder;
+  }
+  
+  public int getHP() {
+    return this.hp;
+  }
+  
+  public void setHP(int hp) {
+    this.hp = hp;
+  }
+}

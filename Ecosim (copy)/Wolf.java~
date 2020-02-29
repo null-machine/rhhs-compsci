@@ -1,0 +1,29 @@
+class Wolf extends Animal implements Comparable<Wolf> {
+  private String placeholder = "w"; // delete later
+  
+  Wolf(int hp) {
+    super(hp);
+  }
+  
+  public int compareTo(Wolf wolf) {
+    if (this.getHP()>wolf.getHP()) {
+      return 1;
+    } else if (this.getHP()==wolf.getHP()) {
+      return 0;
+    }
+    return -1;
+  }
+  
+  public void eat(Being being) {
+    if (being instanceof Sheep) {
+      this.setHP(this.getHP()+being.getHP());
+    }
+  }
+  //del LATER
+  public String getPlaceholder() {
+    return this.placeholder;
+  }
+  
+  public void interact(Being reactor) {
+  }
+}

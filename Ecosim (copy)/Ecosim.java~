@@ -1,0 +1,53 @@
+/* Ecosim.java
+ * V 1.0
+ * Sarita Sou
+ * 11/22/2018
+ * A simulated ecosystem.
+ */
+
+// next time: movement methods (scroll down)
+//REPLACE ALL HP VARIABLES W INPUT LATER IF POSSIBLE ACROSS ALL CODE TO DELETE THESE VARIABLES FOREVER
+
+import java.util.Scanner;
+
+class Ecosim {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    //change to Input later
+    System.out.println("What is the nutritional value of the plants?");
+    int plantHP = 10;
+    System.out.println("What is the starting health of the sheep?");
+    int sheepHP = 20;
+    System.out.println("What is the starting health of the wolves?");
+    int wolfHP = 30;
+    System.out.println("How many turns does it take for each plant to spawn a new plant?");
+    int plantSpawnRate = 1; // CHANGE BACK LATER
+    System.out.println("What is the initial amount of sheep?");
+    int sheepAmount = 0;
+    System.out.println("What is the initial amount of wolves?");
+    int wolfAmount = 0;
+    
+    Ecosystem system = new Ecosystem(plantHP,sheepHP,wolfHP,plantSpawnRate,sheepAmount,wolfAmount);
+    
+    //Set up Grid Panel
+    DisplayGrid grid = new DisplayGrid(system.getMap());
+    
+    //Display the grid on a Panel
+    grid.refresh();
+    
+    
+    while (system.getRunning()) {
+      //Small delay
+      try{ Thread.sleep(5000); }catch(Exception e) {};
+      
+      
+      // change map
+      system.moveAnimals();
+      system.newTurn();
+      
+      //Display the grid on a Panel
+      grid.refresh();
+    }
+    System.out.println("end"); //replace w which species went extinct LATER
+  }
+}

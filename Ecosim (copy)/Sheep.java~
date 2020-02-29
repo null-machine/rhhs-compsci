@@ -1,0 +1,21 @@
+class Sheep extends Animal {
+  private String placeholder = "s"; // delete later
+  
+  Sheep(int hp) {
+    super(hp);
+  }
+  
+  public void eat(Being being) {
+    if (being instanceof Plant) {
+      this.setHP(this.getHP()+being.getHP());
+    }
+  }
+  
+  //delete later
+  public String getPlaceholder() {
+    return this.placeholder;
+  }
+  
+  public void interact(Being reactor) {
+  }
+}

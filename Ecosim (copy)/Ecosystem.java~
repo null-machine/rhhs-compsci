@@ -1,0 +1,158 @@
+// next time: for newturn, output numbers of each species + number of turns occurred
+// XSTART MIGHT NOT WORK WHEN IS AT (0,0)
+
+import java.util.ArrayList;
+
+class Ecosystem {
+  private Being[][] map = new Being[3][3];
+  private int plantHP;
+  /* private int sheepHP;
+   private int wolfHP;*/
+  private int plantSpawnRate;
+  private int x;
+  private int y;
+  private int turn = 1;
+  private int plantAmount;
+  private int sheepAmount;
+  private int wolfAmount;
+  private boolean spawnValid = false;
+  private boolean running = true;
+  
+  // Initialize Map
+  Ecosystem(int plantHP,int sheepHP,int wolfHP,int plantSpawnRate,int initialSheep,int initialWolves) {
+    this.plantSpawnRate = plantSpawnRate;
+    
+    boolean invalid = true;
+    
+    //for (int i=0;i<map.length*map[0].length/3;i++) {
+      findEmpty(0,0,map.length-1,map[0].length-1);
+      map[x][y] = new Plant(plantHP);
+    //}
+    
+    for (int i=0;i<initialSheep;i++) {
+      findEmpty(0,0,map.length-1,map[0].length-1);
+      map[x][y] = new Sheep(sheepHP);
+      System.out.println("SHEEP");
+    }
+    
+    for (int i=0;i<initialWolves;i++) {
+      findEmpty(0,0,map.length-1,map[0].length-1);
+      map[x][y] = new Wolf(wolfHP);
+      System.out.println("Wolf");
+    }
+  }
+  
+  public int getX() {
+    return this.x;
+  }
+  
+  public int getY() {
+    return this.y;
+  }
+  
+  // method to find empty space within a rectangular section of the map
+  public void findEmpty(int xStart,int yStart,int xRange,int yRange) {
+    spawnValid = false;
+    ArrayList<Integer> xList = new ArrayList<Integer>();
+    ArrayList<Integer> yList = new ArrayList<Integer>();
+    int index;
+    
+    System.out.println(xStart+" "+xStart+xRange);
+    
+    for (int i=xStart;i<=xStart+xRange;i++) {
+      for (int j=yStart;j<=yStart+yRange;j++) {
+        if ((-1<i)&&(i<map.length)&&(-1<j)&&(j<map[0].length)) {
+          if (map[i][j]==null) {
+            xList.add(i);
+            yList.add(j);
+            System.out.println(i+" "+j+" valid");
+          } else {
+            System.out.println(i+" "+j+" invalid");
+          }
+        }
+      }
+    }
+    
+    index = (int)(Math.random()*xList.size());
+    
+    if (xList.size()!=0) {
+      x = xList.get(index);
+      y = yList.get(index);
+      spawnValid = true;
+    }
+  }
+  
+  public boolean getRunning() {
+    return this.running;
+  }
+  
+  public void removeBeing(int x,int y) {
+    map[x][y] = null;
+  }
+  
+  public Being[][] getMap() {
+    return this.map;
+  }
+  
+  public void moveAnimals() { 
+    for(int i = 0; i<map.length;i++)        
+      for(int j = 0; j<map[0].length;j++)
+    { 
+      if (((map[i][j] instanceof Sheep) || (map[i][j] instanceof Wolf)) && !(((Animal)map[i][j]).getMoved())) {
+        ((Animal)map[i][j]).moveCheck(this,i,j);
+      }
+    }
+  }
+  
+  public void newTurn() {
+    plantAmount = 0;
+    sheepAmount = 0;
+    wolfAmount = 0;
+    
+    for(int i = 0; i<map[0].length;i++)        
+      for(int j = 0; j<map.length;j++) 
+    { 
+      if ((map[i][j] instanceof Being)&&(map[i][j].getHP()==0)) {
+        removeBeing(i,j);
+      }
+      
+      if (map[i][j] instanceof Plant) {
+        if (turn%plantSpawnRate==0) {
+          findEmpty(i-1,j-1,3,3);
+          if (spawnValid) { // plants do not grow when overpopulated
+            map[x][y] = new Plant(plantHP);
+            map[x][y].setCounted(true);
+            plantAmount++;
+          }
+        }
+        if (map[i][j].getCounted()==false) {
+          plantAmount++;
+        }
+      } else if ((map[i][j] instanceof Sheep) || (map[i][j] instanceof Wolf)) {
+        map[i][j].setHP(map[i][j].getHP()-1);
+        ((Animal)map[i][j]).setMoved(false);
+        
+        if (map[i][j] instanceof Sheep) {
+          if (map[i][j].getCounted()==false) {
+            sheepAmount++;
+            map[i][j].setCounted(true);
+          }
+        }
+        if (map[i][j] instanceof Wolf) {
+          if (map[i][j].getCounted()==false) {
+            wolfAmount++;
+            map[i][j].setCounted(true);
+          }
+        }
+      }
+    }
+    turn++;
+    System.out.println("Plants: "+plantAmount);
+    /*System.out.println("Sheep: "+sheepAmount);
+    System.out.println("Wolves: "+wolfAmount);*/
+    
+    //if ((plantAmount==0) || (sheepAmount==0) || (wolfAmount==0)) {
+    //  this.running = false;
+    //}
+  }
+}
