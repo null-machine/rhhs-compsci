@@ -1,2 +1,0 @@
-Wilson's Algorithm
-==================

@@ -1,0 +1,10 @@
+sunny|200ms|N|
+d|0.0ms|N|
+player|time|Y/N
+player|time|Y/N
+player|time|Y/N
+player|time|Y/N
+player|time|Y/N
+player|time|Y/N
+player|time|Y/N
+player|time|Y/N

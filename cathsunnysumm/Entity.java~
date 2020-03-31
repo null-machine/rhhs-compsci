@@ -1,0 +1,93 @@
+// Author : SUNNY 
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class Entity implements Cloneable {
+  
+  public static Map<String, Entity> entities = new HashMap<String, Entity>();
+  //class variables
+  public int x, y, w = 32, h = 32;
+  public int hp, attack, defense;
+  public String name, frame;
+  public Bitmap[] frames;
+  public boolean removed = false;
+  public boolean hostile = true;
+  
+  private int frameInterval = 250, framesOfAnimation = 0;
+  private long frameTimer = System.currentTimeMillis();
+  //HP AND DEF STATS ARE SCRAPPED IDEAS. NOT USED IN PROGRAMMING ANYMORE
+  public Entity(String name, String frame, int hp, int atk, int def) {
+    this.name = name;
+    this.hp = hp;
+    attack = atk;
+    defense = def;
+    this.frame = frame;
+    
+    if(frame.equals("")){//if the xml file does not specifie a frame
+      return;
+    }
+    int[] frames = new int[2];
+    //splits the frames into two index values
+    frames[0] = Integer.parseInt(frame.split(",")[0]);
+    frames[1] = Integer.parseInt(frame.split(",")[1]);
+    this.frames = new Bitmap[2];//make a bitmap array to store the frames
+    this.frames[0] = Art.sprites[frames[0]][frames[1]];//first frame
+    this.frames[1] = Art.sprites[frames[0] + 1][frames[1]];//second frame is right to the first frame
+  }
+  
+  public void setPos(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  public void render(Screen screen) {
+    screen.render(frames[framesOfAnimation], x * Tile.SIZE + Level.X_OFFSET, y * Tile.SIZE + Level.Y_OFFSET);
+  }
+  
+  public void remove() {
+    removed = true;
+    if(hostile) {
+      
+      UI.verbose(name + " was slain!");
+    }
+  }
+  
+  public void tick() {
+    if(System.currentTimeMillis() - frameTimer > 2 * frameInterval) {
+      frameTimer = System.currentTimeMillis();
+    }
+    if(System.currentTimeMillis() - frameTimer > frameInterval && frames != null)  {
+      if(framesOfAnimation >= frames.length - 1) framesOfAnimation = 0;
+      else framesOfAnimation++;
+      frameTimer += frameInterval;
+    }
+  }
+  
+  public static Entity newInstance(String key) {
+    try {
+      return (Entity) entities.get(key).clone();
+    } catch (CloneNotSupportedException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+  
+  private Player player;
+  
+  public void interact(Player player) {
+    if(hostile) {
+      this.player = player;
+      UI.combat(player, this);
+    }
+    
+    
+  }
+  
+  public void render(Screen screen, int i, int j) {
+    screen.render(frames[framesOfAnimation], i, j);
+  }
+  
+}

@@ -1,0 +1,233 @@
+//AUTHOR: SUNNY & CATHERINE
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import java.awt.image.BufferStrategy;
+
+import javax.swing.JFrame;
+import java.util.Scanner;
+
+import java.io.*;
+
+public class GameLauncher extends Canvas implements Runnable {
+
+  // call in boss class
+    BossFight boss;
+    
+    //VARIABLES
+    public static String playerName = "";
+    private static final long serialVersionUID = 1L;
+    public static final int WIDTH = 640, HEIGHT = 480;
+    private boolean running = false;
+
+    public static final String NAME = "Computer Science Game";
+    public static long startTime = System.currentTimeMillis();
+    private Screen screen;
+
+    private InputHandler input;
+
+    private int floor = 1;
+    long levelTrans;
+    boolean hasTrans = false;
+    short transint = 1500, dir = 0;
+
+    //AUTHOR:SUNNY
+    public void upFloor(int tx, int ty) {
+        floor++;//increase floor
+        Player player = level.player; //take the player from the old level and sets it equal to a new player
+        level.player = null;//erase the old player on the lower level
+        level = Level.levels.get(floor);//using the hashmap levels, get the level object with the floor integer key
+        player.level = level;
+        player.setPos(tx, ty);
+        level.addEntity(player);
+
+        hasTrans = true;
+        levelTrans = System.currentTimeMillis();
+        dir = 0;
+    }
+    
+   //AUTHOR:SUNNY
+    public void downFloor(int tx, int ty) {
+        floor--;
+        Player p = level.player;
+        level.player = null;
+        level = Level.levels.get(floor);
+        p.level = level;
+        p.setPos(tx, ty);
+        level.addEntity(p);
+
+        hasTrans = true;
+        levelTrans = System.currentTimeMillis();
+        dir = 1;
+    }
+
+    //AUTHOR:SUNNY
+    public void start() {
+        running = true;
+        new Thread(this).start();
+    }
+
+    //AUTHOR:SUNNY
+    public void stop() {
+        running = false;
+    }
+
+    //AUTHOR:SUNNY
+    @Override
+    public void run() {
+        init();
+        int fps = 0, tick = 0;
+        double fpsTimer = System.currentTimeMillis();
+        double nsPerTick = 1000000000.0 / 60;
+        double then = System.nanoTime();
+        double unp = 0;
+        while (running) {
+            double now = System.nanoTime();
+            unp += (now - then) / nsPerTick;
+            then = now;
+            while (unp >= 1) {
+                tick++;
+                tick();
+                --unp;
+            }
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            fps++;
+            render();
+            if (System.currentTimeMillis() - fpsTimer > 1000) {
+                //System.out.printf("%d fps, %d tick%n", fps, tick);
+                fps = 0;
+                tick = 0;
+                fpsTimer += 1000;
+            }
+            if (floor == 1) {
+                BossFight boss = new BossFight();
+                floor++;
+            }
+        }
+    }
+
+    //AUTHOR:SUNNY
+    private void render() {
+        BufferStrategy bs = this.getBufferStrategy();
+        if (bs == null) {
+            createBufferStrategy(2);
+            requestFocus();
+            return;
+        }
+        Graphics g = bs.getDrawGraphics();
+
+        UI.render(screen);
+        level.render(screen);
+
+        if (hasTrans) {
+            if (System.currentTimeMillis() - levelTrans > transint) {
+                hasTrans = false;
+                levelTrans += transint;
+            } else {
+
+                screen.render(Art.black, 0, 0);
+                if (System.currentTimeMillis() - levelTrans < transint / 2) {
+                    switch (dir) {
+                        case 0:
+                            if (floor >= 0 && floor <= 20) {
+                                Font.draw(screen, "Room " + (floor - 1), WIDTH / 2 - Font.getStringWidth("Room " + floor) / 2, HEIGHT / 4 * 3 - 7);
+                            }
+                            if (floor < 0) {
+                                Font.draw(screen, "Room " + (floor - 1), WIDTH / 2 - Font.getStringWidth("Room " + floor) / 2, HEIGHT / 4 * 3 - 7);
+                            }
+                            break;
+                        case 1:
+                            if (floor >= 0 && floor <= 20) {
+                                Font.draw(screen, "Room " + (floor + 1), WIDTH / 2 - Font.getStringWidth("Room " + floor) / 2, HEIGHT / 4 * 3 - 7);
+                            }
+                            if (floor < 0) {
+                                Font.draw(screen, "Room " + (floor + 1), WIDTH / 2 - Font.getStringWidth("Room " + floor) / 2, HEIGHT / 4 * 3 - 7);
+                            }
+                            break;
+                    }
+                } else {
+                    Font.draw(screen, "Room " + floor, WIDTH / 2 - Font.getStringWidth("Room " + floor) / 2, HEIGHT / 4 * 3 - 7);
+                }
+
+            }
+        }
+
+        Font.draw(screen, hx + "," + hy, 10, 10);
+        Font.draw(screen, "X", hx * Tile.SIZE + Level.X_OFFSET + (Tile.SIZE / 2 - 7), Level.Y_OFFSET + hy * Tile.SIZE + (Tile.SIZE / 2 - 7));
+
+        UI.battleScreen(screen);
+
+        g.drawImage(screen.image, 0, 0, WIDTH, HEIGHT, null);
+        g.dispose();
+        bs.show();
+    }
+
+    //AUTHOR:SUNNY
+    private void tick() {
+        level.tick();
+        UI.tick(floor, input);
+    }
+
+    Level level;
+
+    //AUTHOR:SUNNY
+    private void init() {
+
+        screen = new Screen(WIDTH, HEIGHT);
+        input = new InputHandler(this);
+        DynamicsLoader.init(this, input);
+        level = Level.levels.get(floor);
+        UI.track(level.player);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+      
+       ///CATHERINE///
+        Scanner input = new Scanner(System.in);
+        File myFile = new File("pastPlayers.txt");
+        boolean titleScreenConsoleDone = false;
+        do {
+            System.out.println("________________\nESCAPE TOWER LOADER\n'escape with brains and brawn'\n________________\n");
+            System.out.println("Hello adventurer what is your name?");
+            playerName = input.nextLine();
+
+            System.out.println("Welcome " + playerName + "! Here is the last past player, you may be on here too!");
+            Scanner readFile = new Scanner(myFile);   //readFile is the name of a Scanner object (reads in from file)
+            System.out.println("PLAYER NAME|TIME TAKEN|DEFEATED THE BOSS (Y/N)\n_______________________________________");
+            
+            while (readFile.hasNextLine()) {
+                System.out.println(readFile.nextLine());
+            }// end of the read file, for all next line
+            
+            System.out.println("_______________________________________\n OPEN THE JAVA FRAM & ENJOY YOUR GAME! USE WASD KEYS (W- UP, S-DOWN, A-LEFT, D-RIGHT)\nTO TALK TO THE NPCS/FIGHT THE WEAPONS, SIMPLY WALK TOWARDS THE PERSON");
+            readFile.close();
+
+            titleScreenConsoleDone = true;
+        } while (titleScreenConsoleDone == false); //end of do while loop
+        
+        ///////////////
+        GameLauncher game = new GameLauncher();
+        game.setMaximumSize(new Dimension(WIDTH, HEIGHT));
+        game.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        game.setSize(new Dimension(WIDTH, HEIGHT));
+
+        JFrame frame = new JFrame(NAME);
+        frame.add(game);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+        game.start();
+
+    }
+
+    int hx = 0, hy = 0;
+
+}

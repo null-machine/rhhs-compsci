@@ -1,0 +1,66 @@
+//package checkers;
+
+/**
+ * Eval.java
+ * @author Glen, Eric
+ * May 3, 2019
+ */
+
+import java.awt.Point;
+
+public class Eval {
+	private static int[][] board = new int[26][18];
+	private static int[][] dist;
+
+	public static int getDist(Point piece) {
+		return dist[piece.x][piece.y];
+	}
+
+	public static void computeDist() {
+		dist = new int [board.length][board[0].length];
+		for(int i = 9; i<board.length; i++) {
+			for(int j = 0; j<board[i].length; j++){
+				if (board[i][j] != -1){
+					dist[i][j] = calcDist(new Point(i, j));
+				}
+			}
+		}
+	}
+
+	private static int calcDist(Point piece){
+		boolean found = false;
+		int currX = piece.x;
+		int currY = piece.y;
+		int distance = 0;
+		while (!found) {
+			if (currX == 25 && currY == 13) {
+				found = true;
+			}
+			if (!found) {
+				//figure if on left or right of midline (y = 2x or currY = currX/2)
+				//move down
+				//else move towards midline
+				if ((currX/2)<currY) {//right of midline
+					if (currX + 1 < board.length && board[currX+1][currY]!=-1) {
+						currX++;
+						distance++;
+					} else{
+						//currX++;
+						currY--;
+						distance++;
+					}
+				} else {
+					if(currX+1 < board.length && currY+1 < board[currX].length && board[currX+1][currY+1]!=1){
+						currX++;
+						currY++;
+						distance++;
+					} else {
+						currY++;
+						distance++;
+					}
+				}
+			}
+		}
+		return distance;
+	}
+}

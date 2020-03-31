@@ -1,0 +1,179 @@
+<levels>
+	<define>
+		<pixel rgb="0,0,0" bind="0" />
+		<pixel rgb="150,150,150" bind="3" />
+		<pixel rgb="0,174,239" bind="2" />
+		<pixel rgb="140,98,57" bind="1" />
+		<pixel rgb="255,0,0" bind="4" />
+		<pixel rgb="102,45,145" bind="5" />
+	</define>
+	<level floor="1">
+		<entity type="StairsUp" x="5" y="4" tx="5" ty="5" />
+		<entity type="NPC" sprite="3" title="Fairy" oninteract="Hi Adventurer! your goal#is to kill as many#monsters as possible in as#quick of a time as#possible!" remove="1"  x="5" y="7" />
+                <entity type="NPC" sprite="3" title="Fairy" oninteract="Move into a#monster to kill#them. you will need#to solve riddles to#progress!#CHECK THE CONSOLE FOR THE RIDDLES!" remove="1"  x="5" y="6" />
+		<entity type="Player" x="5" y="12" />
+                
+	</level>
+	
+	<level floor="2">	
+		<entity type="StairsDown" x="5" y="4" tx="6" ty="4" />
+		<entity type="StairsUp" x="11" y="9" tx="10" ty="9" />
+		
+		
+		<entity type="NPC" sprite="4" title="Riddle Woman" oninteract="The answer was:# Starting" x="6" y="6" remove="1" />
+		<entity type="NPC" sprite="5" title="Riddle Woman" oninteract="The answer was:# Penny" x="8" y="7" remove="1" />
+                <entity type="NPC" sprite="6" title="Riddle Woman" oninteract="The answer was:# David" x="2" y="7" remove="1" />
+                <entity type="NPC" sprite="7" title="Riddle Woman" oninteract="The answer was:# living room" x="0" y="3" remove="1" />
+		--<entity type="WarriorSkeleton" x="4" y="0" />
+		
+		<entity type="WarriorSkeleton" x="4" y="2" />
+		<entity type="WarriorSkeleton" x="3" y="0" />
+		<entity type="Skeleton" x="0" y="2" />
+		<entity type="WarriorSkeleton" x="1" y="1" />
+		<entity type="Undead" x="1" y="10" />
+		<entity type="Undead" x="3" y="11" />
+		<entity type="RedSlime" x="9" y="7" />
+		<entity type="RedSlime" x="10" y="7" />
+		<entity type="GemGolem" x="11" y="5" />
+		<entity type="LargeBat" x="8" y="11" />
+		<entity type="BlackSlime" x="4" y="12" />
+		<entity type="BlackSlime" x="7" y="11" />
+		<entity type="SmallBat" x="3" y="5" />
+		<entity type="SmallBat" x="2" y="6" />
+		<entity type="GreenSlime" x="7" y="9" />
+		<entity type="RedSlime" x="8" y="9" />
+		<entity type="GreenSlime" x="9" y="9" />
+		<entity type="ApprenticeWizard" x="2" y="6" />
+		<entity type="ApprenticeWizard" x="2" y="8" />
+		<entity type="ApprenticeWizard" x="0" y="8" />
+		<entity type="ApprenticeWizard" x="3" y="8" />
+		<entity type="BlackSlime" x="8" y="6" /> 
+		<entity type="WarriorSkeleton" x="10" y="1" />
+                
+                
+		
+	</level>
+	
+	<level floor="3">
+		<entity type="StairsUp" x="0" y="0" tx="3" ty="0" />
+		<entity type="StairsDown" x="11" y="12" tx="10" ty="9" />
+		<entity type="NPC" sprite="8" title="Riddle Woman" oninteract="The answer was:# dictionary" x="5" y="11" remove="1" />
+                <entity type="NPC" sprite="9" title="Riddle Woman" oninteract="The answer was:# just one word" x="6" y="5" remove="1" />
+                <entity type="NPC" sprite="10" title="Riddle Woman" oninteract="The answer was:# candle" x="0" y="4" remove="1" />
+                <entity type="NPC" sprite="11" title="Riddle Woman" oninteract="The answer was:# fire" x="9" y="3" remove="1" />
+                <entity type="NPC" sprite="12" title="Riddle Woman" oninteract="The answer was:# egg" x="6" y="1" remove="1" />
+                
+		
+		
+	</level>
+	
+	<level floor="4">
+		<entity type="StairsDown" x="2" y="0" tx="2" ty="1" />
+		<entity type="StairsUp" x="0" y="12" tx="0" ty="11" />
+		
+		<entity type="NPC" sprite="13" title="Riddle Woman" oninteract="The answer was:# die" x="0" y="3" remove="1" />
+                <entity type="NPC" sprite="14" title="Riddle Woman" oninteract="The answer was:# glove" x="3" y="3" remove="1" />
+                <entity type="NPC" sprite="15" title="Riddle Woman" oninteract="The answer was:# breath" x="6" y="0" remove="1" />
+                
+		
+		
+				
+		<entity type="Skeleton" x="3" y="4" />
+		<entity type="RedSlime" x="0" y="1" />
+		<entity type="GreenSlime" x="1" y="2" />
+		<entity type="Skeleton" x="6" y="3" />
+		
+		<entity type="RedSlime" x="5" y="2" />
+		<entity type="Skeleton" x="7" y="4" />
+		
+		<entity type="ApprenticeWizard" x="5" y="7" />
+		
+		<entity type="SmallBat" x="0" y="8" />
+		<entity type="RedSlime" x="1" y="11" />
+		<entity type="WarriorSkeleton" x="5" y="6" />
+		<entity type="SmallBat" x="4" y="8" />
+		<entity type="MysticWizard" x="6" y="10" />
+		<entity type="ApprenticeWizard" x="7" y="11" />
+		<entity type="ApprenticeWizard" x="6" y="12" />
+		
+		
+	</level>
+	
+	<level floor="5">
+		<entity type="StairsDown" x="11" y="12" tx="0" ty="11" />
+		<entity type="StairsUp" x="0" y="0" tx="0" ty="7" />
+		
+		
+		
+		
+		<entity type="BlackSlime" x="2" y="7" />
+		<entity type="LargeBat" x="1" y="1" />
+		<entity type="WarriorSkeleton" x="1" y="3" />
+		<entity type="LargeBat" x="1" y="5" />
+		<entity type="SmallBat" x="6" y="12" /> 
+		<entity type="BlackSlime" x="6" y="8" />
+		
+		<entity type="RedSlime" x="5" y="10" />
+		<entity type="BlackSlime" x="6" y="10" />
+		<entity type="RedSlime" x="6" y="10" />
+		<entity type="SmallBat" x="8" y="10" />
+		<entity type="Skeleton" x="10" y="7" />
+		
+		<entity type="LargeBat" x="6" y="2" />
+		
+		<entity type="WarriorSkeleton" x="3" y="1" />
+		<entity type="LargeBat" x="11" y="9" />
+		<entity type="NPC" sprite="16" title="Riddle Woman" oninteract="The answer was:# mount everest" x="3" y="1" remove="1" />
+                <entity type="NPC" sprite="17" title="Riddle Woman" oninteract="The answer was:# nothing" x="2" y="7" remove="1" />
+                <entity type="NPC" sprite="18" title="Riddle Woman" oninteract="The answer was:# SEE O DOUBLE YOU" x="8" y="3" remove="1" />
+                
+		<item type="Rod" x="10" y="5" />
+	</level>
+	
+	<level floor="6">
+		<entity type="StairsDown" x="11" y="12" tx="0" ty="7" />
+		<entity type="StairsUp" x="0" y="0" tx="11" ty="9" />
+		
+		
+		
+		
+
+		<entity type="NPC" sprite="19" title="Riddle Woman" oninteract="The answer was:# age" x="1" y="0" remove="1" />
+                <entity type="NPC" sprite="20" title="Riddle Woman" oninteract="The answer was:# fence" x="5" y="3" remove="1" />
+                <entity type="NPC" sprite="21" title="Riddle Woman" oninteract="The answer was:# umbrella" x="2" y="7" remove="1" />
+		
+		<entity type="BloodBat" x="4" y="11" />
+		<entity type="BloodBat" x="3" y="11" />
+		<entity type="LeaderSkeleton" x="1" y="11" />
+		<entity type="CaptainKnight" x="7" y="12" />
+		<entity type="Knight" x="8" y="12" />
+		<entity type="Necromancer" x="4" y="9" />
+		<entity type="UndeadWarrior" x="10" y="8" />
+		<entity type="UndeadWarrior" x="7" y="9" />
+		<entity type="SapphireGolem" x="11" y="8" />
+		<entity type="SapphireGolem" x="11" y="7" />
+		<entity type="RockConstruct" x="11" y="0" />
+		<entity type="Knight" x="4" y="7" />
+		<entity type="Knight" x="9" y="3" />
+		<entity type="CaptainKnight" x="9" y="2" />
+		<entity type="CaptainKnight" x="9" y="4" />
+		<entity type="RockConstruct" x="4" y="5" />
+		<entity type="LargeBat" x="7" y="2" />
+		<entity type="LargeBat" x="7" y="4" />
+		<entity type="GemGolem" x="6" y="2" />
+		<entity type="GemGolem" x="6" y="4" />
+		<entity type="MysticWizard" x="2" y="8" />
+		<entity type="LargeBat" x="1" y="3" />
+		<entity type="Undead" x="7" y="6" />
+		<entity type="Undead" x="6" y="3" />
+		<entity type="Undead" x="1" y="1" />
+		<entity type="GemGolem" x="6" y="0" />
+		
+		
+	</level>
+        <level floor="7">
+            <entity type="NPC" sprite="2" title="Jack the Thief" oninteract="Congrats!! You Solved the # MYSTERY!" x="11" y="3" remove="1" />
+        </level>
+
+	
+</levels>
