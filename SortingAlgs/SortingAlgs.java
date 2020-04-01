@@ -7,7 +7,7 @@ class SortingAlgs {
 	
 	public static void main(String[] args) {
 		
-		int data[] = generateNumberArray(20);
+		int data[] = generateNumberArray(2000);
 		int[] tempArray;
 		long startTime, endTime;
 		double elapsedTime;
