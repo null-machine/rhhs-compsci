@@ -5,7 +5,7 @@ import java.awt.Graphics;
 class Triangle extends Shape {
 	
 	public Triangle(Scanner input) {
-		super(); // skips centroid prompt
+		super();
 		vertices = new Point[3];
 		int xSum = 0;
 		int ySum = 0;
@@ -18,7 +18,9 @@ class Triangle extends Shape {
 			vertices[i] = new Point(x, y);
 		}
 		centroid = new Point(xSum / 3, ySum / 3);
-		
+		for (int i = 0; i < vertices.length; i++) {
+			vertices[i] = new Point(vertices[i].x - centroid.x, vertices[i].y - centroid.y);
+		}
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ abstract class Shape {
 		centroid = new Point(input.nextInt(), input.nextInt());
 	}
 	
-	// overload constructor to let triangle skip centroid prompt
+	// overload constructor to skip centroid prompt
 	protected Shape() {}
 	
 	public void draw(Graphics g, Point shift, double scale) {

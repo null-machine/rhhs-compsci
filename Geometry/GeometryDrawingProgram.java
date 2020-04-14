@@ -30,39 +30,6 @@ public class GeometryDrawingProgram {
 			shapes.add(new Triangle(input));
 			System.out.println(shapes.get(0).getArea());
 			frame.repaint();
-			
-			// modify and remove are intuitive
-			
-			System.out.println("input anything to translate shapes");
-			input.next();
-			gs.translate(100, 20);
-			frame.repaint();
-			
-			System.out.println("input anything to scale shapes up");
-			input.next();
-			gs.scale(2.0);
-			frame.repaint();
-			
-			System.out.println("input anything to translate shapes while scaled");
-			input.next();
-			gs.translate(-100, -20);
-			frame.repaint();
-			
-			System.out.println("input anything to scale shapes down");
-			input.next();
-			gs.scale(0.2);
-			frame.repaint();
-			
-			System.out.println("input anything to save this drawing");
-			input.next();
-			gs.scale = 1;
-			frame.repaint();
-			
-			System.out.println("input anything to quit");
-			input.next();
-			System.exit(0);
-			
-			frame.repaint();
 		}
 	}
 	
@@ -74,7 +41,7 @@ public class GeometryDrawingProgram {
 		private static double scale = 1.0;
 		public void scale(double scale) { this.scale *= scale; }
 		
-		GeometryScreen() {
+		private GeometryScreen() {
 			frame = new JFrame("Geometry Drawing Program 1.0");
 			frame.getContentPane().add(new GraphicsPanel());
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

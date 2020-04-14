@@ -2,33 +2,22 @@ import java.util.Scanner;
 import java.awt.Point;
 import java.awt.Graphics;
 
-class Rectangle extends Shape {
+class Rectangle extends Parallelogram {
 	
 	public Rectangle(Scanner input) {
-		super(input);
+		super(input, null);
 		System.out.println("Input the width and height:");
-		int width = input.nextInt();
-		int height = input.nextInt();
-		construct(width, height);
+		int width = input.nextInt() / 2;
+		int height = input.nextInt() / 2;
+		construct(width, height, width, -height);
 	}
 	
 	protected Rectangle(Scanner input, Object overloader) {
-		super(input);
-	}
-	
-	protected void construct(int width, int height) {
-		width /= 2;
-		height /= 2;
-		vertices = new Point[] {
-			new Point(width, height),
-			new Point(-width, height),
-			new Point(-width, -height),
-			new Point(width, -height)
-		};
+		super(input, overloader);
 	}
 	
 	@Override
-	public double getArea() {
+	public double getArea() { // faster than parallelo's but parallelo's works too
 		return Math.abs(vertices[0].x * vertices[0].y) * 4;
 	}
 }
