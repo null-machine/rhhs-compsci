@@ -3,12 +3,15 @@ import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 
 class Serializer {
 	
 	public static <T> void save(String fileName, ArrayList<T> list) {
 		try {
+			File file = new File(fileName);
+			file.createNewFile();
 			FileOutputStream fileOutput = new FileOutputStream(fileName);
 			ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
 			objectOutput.writeObject(list);

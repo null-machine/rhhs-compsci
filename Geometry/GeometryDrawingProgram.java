@@ -50,9 +50,11 @@ public class GeometryDrawingProgram {
 				System.out.println("Input the scale factor (double): ");
 				gs.scale(input.nextDouble());
 			} else if (choice == 5) {
-				System.out.println("Input the scale factor (double): ");
+				System.out.println("Input the file name to save to: ");
+				Serializer.save(input.next(), shapes);
 			} else if (choice == 6) {
-				System.out.println("Input the scale factor (double): ");
+				System.out.println("Input the file name to load from: ");
+				shapes = Serializer.load(input.next());
 			} else if (choice == 7) {
 				input.close(); // :glares angrily at petty mark lost on my own summative:
 				System.exit(0);
