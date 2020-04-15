@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GeometryDrawingProgram {
 	private static JFrame frame;
@@ -15,28 +16,64 @@ public class GeometryDrawingProgram {
 		GeometryScreen gs = new GeometryScreen();
 		Scanner input = new Scanner(System.in);
 		
-		// System.out.println("0 - ADD\n1 - REMOVE\n2 - MODIFY\n3 - TRANSLATE\n4 - SCALE\n5 - SAVE\n6 - LOAD\n7 - QUIT\n");
-		
-		/*
-		what the loop should look like
-		1) get input
-		2) if else jungle to determine what the user wants
-		3) apply changes
-		4) frame.repaint to update changes
-		5) loop
-		*/
-		
+		int choice;
 		while (true) {
-			shapes.add(new Triangle(input));
-			System.out.println(shapes.get(0).getArea());
+			System.out.println("\n0 - Add\n1 - Remove\n2 - Modify\n3 - Translate\n4 - Scale\n5 - Save\n6 - Load\n7 - Quit");
+			System.out.print("Input your choice: ");
+			choice = input.nextInt();
+			System.out.println();
+			if (choice == 0) {
+				System.out.println("0 - Parallelogram\n1 - Rectangle\n2 - Square\n3 - Rhombus\n4 - Oval\n5 - Circle\n6 - Triangle");
+				System.out.print("Input your choice: ");
+				choice = input.nextInt();
+				System.out.println();
+				if (choice == 0) shapes.add(new Parallelogram(input));
+				else if (choice == 1) shapes.add(new Rectangle(input));
+				else if (choice == 2) shapes.add(new Square(input));
+				else if (choice == 3) shapes.add(new Rhombus(input));
+				else if (choice == 4) shapes.add(new Oval(input));
+				else if (choice == 5) shapes.add(new Circle(input));
+				else if (choice == 6) shapes.add(new Triangle(input));
+			} else if (choice == 1) {
+				display();
+				System.out.print("Input your choice to delete: ");
+				choice = input.nextInt();
+				if (choice >= 0 || choice < shapes.size()) shapes.remove(choice);
+				else System.out.println("insert witty failure message here");
+			} else if (choice == 2) {
+				System.out.println("have fun writing a billion getters and setters cause i sure wouldnt");
+				System.out.println("(but also remember to recompute centroids after changing vertices)");
+			} else if (choice == 3) {
+				System.out.print("Input the x and y shift: ");
+				int shiftX = input.nextInt();
+				int shiftY = input.nextInt();
+				gs.shift(shiftX, shiftY);
+			} else if (choice == 4) {
+				System.out.print("Input the scale factor (double): ");
+				gs.scale(input.nextDouble());
+			} else if (choice == 5) {
+				System.out.print("Input the scale factor (double): ");
+			} else if (choice == 6) {
+				System.out.print("Input the scale factor (double): ");
+			} else if (choice == 7) {
+				System.exit(0);
+			}
 			frame.repaint();
+		}
+	}
+	
+	private static void display() {
+		Collections.sort(shapes);
+		for (int i = 0; i < shapes.size(); i++) {
+			System.out.println(i + " - " + shapes.get(i).getClass().getName());
+			// should print more info but i personally cannot be bothered
 		}
 	}
 	
 	private static class GeometryScreen {
 		
 		private static Point shift = new Point(0, 0);
-		public void translate(int x, int y) { shift = new Point(shift.x + x, shift.y + y); }
+		public void shift(int x, int y) { shift = new Point(shift.x + x, shift.y + y); }
 		
 		private static double scale = 1.0;
 		public void scale(double scale) { this.scale *= scale; }

@@ -3,16 +3,18 @@ import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-abstract class Shape {
+abstract class Shape implements Comparable<Shape> {
 	
 	// give these setters for modifying
 	protected Point centroid;
 	protected Point[] vertices;
+	// protected double rotation; // for sadists
 	
 	protected Shape(Scanner input) {
 		System.out.println("- Constructing " + this.getClass().getName() + " -");
-		System.out.println("Input the x and y coordinates of the centroid:");
+		System.out.print("Input the x and y coordinates of the centroid: ");
 		centroid = new Point(input.nextInt(), input.nextInt());
+		System.out.println();
 	}
 	
 	// overload constructor to skip centroid prompt
@@ -30,4 +32,9 @@ abstract class Shape {
 	}
 	
 	public abstract double getArea();
+	// public abstract double getPeri(); have fun
+	
+	public int compareTo(Shape other) {
+		return (int)(getArea() - other.getArea());
+	}
 }

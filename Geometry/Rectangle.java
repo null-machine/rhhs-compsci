@@ -6,7 +6,7 @@ class Rectangle extends Parallelogram {
 	
 	public Rectangle(Scanner input) {
 		super(input, null);
-		System.out.println("Input the width and height:");
+		System.out.print("Input the width and height: ");
 		int width = input.nextInt() / 2;
 		int height = input.nextInt() / 2;
 		construct(width, height, width, -height);

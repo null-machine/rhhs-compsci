@@ -6,13 +6,17 @@ class Parallelogram extends Shape {
 	
 	public Parallelogram(Scanner input) {
 		super(input);
-		System.out.println("Input the x and y offsets of a corner:");
+		System.out.print("Input the x and y offsets of a corner: ");
 		int oneX = input.nextInt();
 		int oneY = input.nextInt();
-		System.out.println("Input the x and y offsets of another corner:");
+		System.out.print("Input the x and y offsets of another corner: ");
 		int twoX = input.nextInt();
 		int twoY = input.nextInt();
 		construct(oneX, oneY, twoX, twoY);
+	}
+	
+	protected Parallelogram(Scanner input, Object overloader) {
+		super(input);
 	}
 	
 	protected void construct(int oneX, int oneY, int twoX, int twoY) {
@@ -21,10 +25,6 @@ class Parallelogram extends Shape {
 		vertices[1] = new Point(twoX, twoY);
 		vertices[2] = new Point(-oneX, -oneY);
 		vertices[3] = new Point(-twoX, -twoY);
-	}
-	
-	protected Parallelogram(Scanner input, Object overloader) {
-		super(input);
 	}
 	
 	@Override
