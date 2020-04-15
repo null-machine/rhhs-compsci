@@ -2,8 +2,9 @@ import java.util.Scanner;
 import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-abstract class Shape implements Comparable<Shape> {
+abstract class Shape implements Comparable<Shape>, Serializable {
 	
 	// give these setters for modifying
 	protected Point centroid;
@@ -12,9 +13,8 @@ abstract class Shape implements Comparable<Shape> {
 	
 	protected Shape(Scanner input) {
 		System.out.println("- Constructing " + this.getClass().getName() + " -");
-		System.out.print("Input the x and y coordinates of the centroid: ");
+		System.out.println("Input the x and y coordinates of the centroid: ");
 		centroid = new Point(input.nextInt(), input.nextInt());
-		System.out.println();
 	}
 	
 	// overload constructor to skip centroid prompt
@@ -37,4 +37,6 @@ abstract class Shape implements Comparable<Shape> {
 	public int compareTo(Shape other) {
 		return (int)(getArea() - other.getArea());
 	}
+	
+	
 }

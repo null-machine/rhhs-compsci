@@ -19,14 +19,12 @@ public class GeometryDrawingProgram {
 		int choice;
 		while (true) {
 			System.out.println("\n0 - Add\n1 - Remove\n2 - Modify\n3 - Translate\n4 - Scale\n5 - Save\n6 - Load\n7 - Quit");
-			System.out.print("Input your choice: ");
+			System.out.println("Input your choice: ");
 			choice = input.nextInt();
-			System.out.println();
 			if (choice == 0) {
 				System.out.println("0 - Parallelogram\n1 - Rectangle\n2 - Square\n3 - Rhombus\n4 - Oval\n5 - Circle\n6 - Triangle");
-				System.out.print("Input your choice: ");
+				System.out.println("Input your choice: ");
 				choice = input.nextInt();
-				System.out.println();
 				if (choice == 0) shapes.add(new Parallelogram(input));
 				else if (choice == 1) shapes.add(new Rectangle(input));
 				else if (choice == 2) shapes.add(new Square(input));
@@ -36,7 +34,7 @@ public class GeometryDrawingProgram {
 				else if (choice == 6) shapes.add(new Triangle(input));
 			} else if (choice == 1) {
 				display();
-				System.out.print("Input your choice to delete: ");
+				System.out.println("Input your choice to delete: ");
 				choice = input.nextInt();
 				if (choice >= 0 || choice < shapes.size()) shapes.remove(choice);
 				else System.out.println("insert witty failure message here");
@@ -44,18 +42,19 @@ public class GeometryDrawingProgram {
 				System.out.println("have fun writing a billion getters and setters cause i sure wouldnt");
 				System.out.println("(but also remember to recompute centroids after changing vertices)");
 			} else if (choice == 3) {
-				System.out.print("Input the x and y shift: ");
+				System.out.println("Input the x and y shift: ");
 				int shiftX = input.nextInt();
 				int shiftY = input.nextInt();
 				gs.shift(shiftX, shiftY);
 			} else if (choice == 4) {
-				System.out.print("Input the scale factor (double): ");
+				System.out.println("Input the scale factor (double): ");
 				gs.scale(input.nextDouble());
 			} else if (choice == 5) {
-				System.out.print("Input the scale factor (double): ");
+				System.out.println("Input the scale factor (double): ");
 			} else if (choice == 6) {
-				System.out.print("Input the scale factor (double): ");
+				System.out.println("Input the scale factor (double): ");
 			} else if (choice == 7) {
+				input.close(); // :glares angrily at petty mark lost on my own summative:
 				System.exit(0);
 			}
 			frame.repaint();
@@ -66,7 +65,7 @@ public class GeometryDrawingProgram {
 		Collections.sort(shapes);
 		for (int i = 0; i < shapes.size(); i++) {
 			System.out.println(i + " - " + shapes.get(i).getClass().getName());
-			// should print more info but i personally cannot be bothered
+			// should println more info but i personally cannot be bothered
 		}
 	}
 	

@@ -9,10 +9,9 @@ class Oval extends Shape {
 	
 	public Oval(Scanner input) {
 		super(input);
-		System.out.print("Input the width and height: ");
+		System.out.println("Input the width and height: ");
 		width = input.nextInt() / 2;
 		height = input.nextInt() / 2;
-		System.out.println();
 	}
 	
 	protected Oval(Scanner input, Object overloader) {

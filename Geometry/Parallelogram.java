@@ -6,10 +6,10 @@ class Parallelogram extends Shape {
 	
 	public Parallelogram(Scanner input) {
 		super(input);
-		System.out.print("Input the x and y offsets of a corner: ");
+		System.out.println("Input the x and y offsets of a corner: ");
 		int oneX = input.nextInt();
 		int oneY = input.nextInt();
-		System.out.print("Input the x and y offsets of another corner: ");
+		System.out.println("Input the x and y offsets of another corner: ");
 		int twoX = input.nextInt();
 		int twoY = input.nextInt();
 		construct(oneX, oneY, twoX, twoY);

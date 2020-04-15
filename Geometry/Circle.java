@@ -6,7 +6,7 @@ class Circle extends Oval {
 	
 	public Circle(Scanner input) {
 		super(input, null);
-		System.out.print("Input the radius: ");
+		System.out.println("Input the radius: ");
 		width = input.nextInt();
 		height = width;
 	}
