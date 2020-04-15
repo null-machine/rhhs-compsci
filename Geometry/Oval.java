@@ -19,6 +19,13 @@ class Oval extends Shape {
 	}
 	
 	@Override
+	public void scale(double scale) {
+		centroid = new Point((int)(scale * (centroid.x - 250) + 250), (int)(scale * (centroid.y - 250) + 250));
+		width = (int)(scale * width);
+		height = (int)(scale * height);
+	}
+	
+	@Override
 	public void draw(Graphics g, Point shift, double scale) {
 		int scaledcentroidX = (int)(scale * (centroid.x + shift.x - width / 2 - 250) + 250);
 		int scaledcentroidY = (int)(scale * (centroid.y + shift.y - height / 2 - 250) + 250);

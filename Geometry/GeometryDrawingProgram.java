@@ -39,16 +39,22 @@ public class GeometryDrawingProgram {
 				if (choice >= 0 || choice < shapes.size()) shapes.remove(choice);
 				else System.out.println("insert witty failure message here");
 			} else if (choice == 2) {
+				display();
 				System.out.println("have fun writing a billion getters and setters cause i sure wouldnt");
 				System.out.println("(but also remember to recompute centroids after changing vertices)");
 			} else if (choice == 3) {
 				System.out.println("Input the x and y shift: ");
 				int shiftX = input.nextInt();
 				int shiftY = input.nextInt();
-				gs.shift(shiftX, shiftY);
+				for (int i = 0; i < shapes.size(); i++) {
+					shapes.get(i).shift(shiftX, shiftY);
+				}
 			} else if (choice == 4) {
 				System.out.println("Input the scale factor (double): ");
-				gs.scale(input.nextDouble());
+				double scale = input.nextDouble();
+				for (int i = 0; i < shapes.size(); i++) {
+					shapes.get(i).scale(scale);
+				}
 			} else if (choice == 5) {
 				System.out.println("Input the file name to save to: ");
 				Serializer.save(input.next(), shapes);
@@ -73,12 +79,6 @@ public class GeometryDrawingProgram {
 	
 	private static class GeometryScreen {
 		
-		private static Point shift = new Point(0, 0);
-		public void shift(int x, int y) { shift = new Point(shift.x + x, shift.y + y); }
-		
-		private static double scale = 1.0;
-		public void scale(double scale) { this.scale *= scale; }
-		
 		private GeometryScreen() {
 			frame = new JFrame("Geometry Drawing Program 1.0");
 			frame.getContentPane().add(new GraphicsPanel());
@@ -91,7 +91,7 @@ public class GeometryDrawingProgram {
 			
 			public void paintComponent(Graphics g) {
 				setDoubleBuffered(true);
-				g.setColor(Color.GRAY);
+				g.setColor(Color.RED);
 				g.drawLine(250, 0, 250, 500);
 				g.drawLine(0, 250, 500, 250);
 				g.setColor(Color.BLACK);
