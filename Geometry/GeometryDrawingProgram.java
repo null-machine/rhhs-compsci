@@ -96,7 +96,7 @@ public class GeometryDrawingProgram {
 				g.drawLine(0, 250, 500, 250);
 				g.setColor(Color.BLACK);
 				for (int i = 0; i < shapes.size(); i++) {
-					shapes.get(i).draw(g, shift, scale);
+					shapes.get(i).draw(g);
 				}
 			}
 		}

@@ -14,7 +14,7 @@ class Serializer {
 			file.createNewFile();
 			FileOutputStream fileOutput = new FileOutputStream(fileName);
 			ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-			objectOutput.writeObject(list); // :dab:
+			objectOutput.writeObject(list);
 			fileOutput.close();
 			objectOutput.close();
 		} catch (Exception exc) {
@@ -27,7 +27,7 @@ class Serializer {
 		try {
 			FileInputStream fileInput = new FileInputStream(fileName);
 			ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-			list = (ArrayList)objectInput.readObject(); // unsafe but thats ur problem now
+			list = (ArrayList)objectInput.readObject(); // unsafe
 			objectInput.close();
 			fileInput.close();
 		} catch (Exception exc) {
