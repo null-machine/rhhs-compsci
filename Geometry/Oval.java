@@ -26,12 +26,10 @@ class Oval extends Shape {
 	}
 	
 	@Override
-	public void draw(Graphics g, Point shift, double scale) {
-		int scaledcentroidX = (int)(scale * (centroid.x + shift.x - width / 2 - 250) + 250);
-		int scaledcentroidY = (int)(scale * (centroid.y + shift.y - height / 2 - 250) + 250);
-		int scaledWidth = (int)(scale * width);
-		int scaledHeight = (int)(scale * height);
-		g.drawOval(scaledcentroidX, scaledcentroidY, scaledWidth, scaledHeight);
+	public void draw(Graphics g) {
+		int scaledcentroidX = (int)(centroid.x - width / 2);
+		int scaledcentroidY = (int)(centroid.y - height / 2);
+		g.drawOval(scaledcentroidX, scaledcentroidY, width, height);
 	}
 	
 	@Override

@@ -25,7 +25,7 @@ class Serializer {
 	public static <T> ArrayList<T> load(String fileName) {
 		ArrayList<T> list = new ArrayList<T>();
 		try {
-			FileInputStream fileInput = new FileInputStream(fileName + ".sav");
+			FileInputStream fileInput = new FileInputStream(fileName);
 			ObjectInputStream objectInput = new ObjectInputStream(fileInput);
 			list = (ArrayList)objectInput.readObject(); // unsafe but thats ur problem now
 			objectInput.close();
